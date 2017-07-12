@@ -2,7 +2,7 @@
 import React, { Component,PropTypes } from 'react';
 import Button from 'react-native-button'
 import Home from './Home';
-
+import { StackNavigator } from 'react-navigation';
 import FloatLabelTextInput from 'react-native-floating-label-text-input';
 const nativeImageSource = require('nativeImageSource');
 import {
@@ -17,6 +17,9 @@ const onButtonPress = () => {
 };
 
 class Login extends Component {
+  static navigationOptions = {
+    title: 'Welcome',
+  };
   constructor(props) {
     super(props)
 

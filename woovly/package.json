@@ -10,10 +10,12 @@
 		"react": "16.0.0-alpha.12",
 		"react-native": "0.45.1",
 		"react-native-button": "^2.0.0",
+		"react-native-drawer": "^2.3.0",
 		"react-native-fit-image": "^1.4.9",
 		"react-native-floating-label-text-input": "^0.1.4",
 		"react-native-search-box": "0.0.9",
 		"react-native-swipe-list-view": "^0.4.1",
+		"react-navigation": "^1.0.0-beta.11",
 		"uuid": "^3.1.0"
 	},
 	"devDependencies": {

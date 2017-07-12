@@ -4,6 +4,8 @@ import FitImage from 'react-native-fit-image';
 import Button from 'react-native-button';
 import Search from 'react-native-search-box';
 import { SwipeListView } from 'react-native-swipe-list-view';
+import ListItem from '../src/components/ListItem';
+import { DrawerNavigator } from 'react-navigation';
 import {
   StyleSheet,
   Text,
@@ -25,6 +27,15 @@ var SCREEN_HEIGHT = require('Dimensions').get('window').height;
 var dataFromServer  = [];
 class Home extends Component {
 
+static navigationOptions = {
+    drawerLabel: 'Home',
+    drawerIcon: ({ tintColor }) => (
+      <Image
+        style={[styles.icon, {tintColor: tintColor}]}
+      />
+    ),
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -45,6 +56,10 @@ class Home extends Component {
    .then(() => {
      this.setState({refreshing: false});
    });
+ }
+
+ openDrawer(){
+this.props.navigation.navigate('DrawerOpen')
  }
 
   componentDidMount() {
@@ -129,11 +144,11 @@ try {
           <TouchableHighlight  style = {{backgroundColor:'#566571',width:60,alignItems: 'center',justifyContent:'center'} } underlayColor={'#566571'} onPress={onButtonPressEdit}>
       <Image
         style={styles.button}
-        
         source={require('../Img/edit.png')}
+        
       />
     </TouchableHighlight>
-        <TouchableHighlight style = {{backgroundColor:'#566571',width:60,alignItems: 'center',justifyContent:'center'}} underlayColor={'#566571'} onPress={onButtonPressDelete}>
+        <TouchableHighlight style = {{backgroundColor:'#566571',width:60,alignItems: 'center',justifyContent:'center'}} underlayColor={'#566571'} onPress={ this.openDrawer.bind(this)}>
       <Image
         style={styles.button}
         source={require('../Img/delete.png')}
@@ -252,117 +267,8 @@ filterNotes(searchText, notes) {
   }
 
   renderMovie(bucket) {
-    console.log( bucket);
-    var logoComp
-    if ((bucket.bkt_image != null) ||  (bucket.bkt_image != "")){
-      logoComp =  "http://alpha.woovly.com:80/" + bucket.bkt_image
-   }else{
-       logoComp = ""
-   }
-    return (
-    <View style={styles.containerListView}>
-      <View style={styles.ColorRow}>
-   <View style={styles.secondRow1}>
-      </View>
-  </View>
-<View style={styles.firstRow}>
-  <View style={styles.nameView}>
-    <FitImage
-      resizeMode="cover"
-      indicator = {false}
-      source={{uri: logoComp }}
-      originalWidth={40}
-      originalHeight={40}
-      defaultSource={require('../Img/iconprofile.png')}
-      style={styles.fitImage}
-      />
-      <View style={styles.timeView}>
-        <Text numberOfLines = {1} style={styles.port}>{bucket.ctime}</Text>
-        <Text  numberOfLines = {1} style={styles.ctime}>{bucket.cdate}</Text>
-        </View>
-
-    </View>
-
-  </View>
-
-<View style={styles.secondRow}>
-   <View style={styles.secondRow11}>
-      </View>
-  </View>
-  <View style={styles.thirdRow}>
-    <View style={styles.thirdRow1}>
-  <View style={styles.nameView}>
-      <Text style={styles.title}>{bucket.bkt_name}</Text>
-       <View style={styles.rightContainerfirstRow}>
-        <Text style={styles.subtitleFirstrow}>{'AUTHOR'}</Text>
-      <Text style={styles.subtitleFirstrow1}>{bucket.name}</Text>
-      </View>
-      </View>
-
-      </View>
-       <View style={styles.thirdRow2}>
-
-
-      </View>
-       <View style={styles.thirdRow3}>
-
-         <View style={styles.secondRow}>
-           <Image
-        style={styles.doclayer}
-        source={require('../Img/doclayer.png')}
-      />
-          {/*<FitImage
-      resizeMode="cover"
-      originalWidth={40}
-      originalHeight={40}
-      source={require('../Img/doclayer.png')}
-      style={styles.fitImage}
-      />*/}
-        <Text style={styles.quantity1}>{bucket.scatCnt}</Text>
-         <FitImage
-      resizeMode="cover"
-      indicator = {false}
-      originalWidth={30}
-      originalHeight={30}
-      defaultSource={require('../Img/iconprofile.png')}
-      style={styles.fitImage}
-      />
-
-    <Text style={{fontSize: 15,
-       textAlign: 'left',
-      color:'green',
-      justifyContent:'center',
-      paddingLeft: 10,
-      fontWeight: 'bold'}}>{bucket.userLink}</Text>
-      <Button
-          style={{fontSize: 15, color: 'black',padding: 5, alignItems: 'flex-end',justifyContent:'center'}}
-          styleDisabled={{color: 'red'}}
-          >
-          Active
-        </Button>
-
-      {}
-     
-
-     <Switch
-          onValueChange={(value) => 
-          this.setState({falseSwitchIsOn: value})}
-          style={{ alignItems: 'flex-end',justifyContent: 'center',marginLeft:15 ,transform: [{scaleX: 0.8}, {scaleY: 0.8}]}}
-          value={this.state.falseSwitchIsOn} />
-
-      </View>
-
-
-      </View>
-   
-  </View>
-
-
-  
-  </View>
-     
-
-    );
+    console.log( bucket); 
+   return <ListItem bucket={bucket} />;
   }
 }
 var styles = StyleSheet.create({
@@ -646,5 +552,10 @@ alignItems: 'flex-start',
     backgroundColor: '#F5FCFF',
   },
 });
-export default Home
+const MyApp = DrawerNavigator({
+  Home: {
+    screen: Home,
+  },
+});
+export default MyApp
 //AppRegistry.registerComponent('Login', () => LoginPage);
