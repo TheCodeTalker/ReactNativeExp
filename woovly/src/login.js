@@ -123,14 +123,13 @@ class Login extends Component {
       if (!this.state.isLogin) {
         return (
         <View style={styles.container}>
-          <Image
-          style={styles.logo1}
-             source={require('../Img/logo.png')}
-          />
+          <View style={{ alignItems: 'center'}}>
+            <Image style={styles.logo1} source={require('../Img/logo.png')}/>
+          </View>  
           <TextInput
           placeholder="Enter UserName"
           autoCapitalize="none"
-          style={{height: 40, borderColor: '#FF7475', borderWidth: 1,marginRight: 30,marginLeft: 30,marginTop: 20}}
+          style={{height: 40,marginRight: 30,marginLeft: 30,marginTop: 20 }}
           value={this.state.username}
           onChangeText={(text) => this.setState({username:text})}
         />
@@ -139,18 +138,20 @@ class Login extends Component {
         autoCapitalize="none"
         secureTextEntry={true}
         value={this.state.password}
-        style={{height: 40, borderColor: '#FF7475', borderWidth: 1,marginRight: 30,marginLeft: 30,marginTop: 20}}
+        style={{height: 40,marginRight: 30,marginLeft: 30,marginTop: 20}}
         onChangeText={(text) => this.setState({password:text})}
-      />
-      <View style={styles.Btncontainer}>
-      <Button
-          style={{fontSize: 20, color: 'white',padding: 5}}
-          styleDisabled={{color: 'red'}}
-          onPress={this.getPostsFromApi.bind(this)}
-          >
-          Sign in
-        </Button>
-        </View>
+        />
+        <View style={{alignItems:'center'}}>
+            <View style={styles.Btncontainer}>   
+                                  
+                <Button
+                    style={{fontSize: 18, color: 'white',padding: 5 }}                
+                    onPress={this.getPostsFromApi.bind(this)}
+                    >
+                    SIGN IN
+                  </Button>              
+            </View>
+          </View>  
           <Text>{this.state.username}</Text>
           <Text>{this.state.password}</Text>
         <View style={styles.ForgotPassword}>
@@ -183,8 +184,7 @@ class Login extends Component {
 var styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: 'center',   
     backgroundColor: '#F5FCFF',
   },
   ForgotPassword: {
@@ -222,6 +222,7 @@ var styles = StyleSheet.create({
     marginLeft: 20,
     marginTop: 10,
       backgroundColor: "#637775",
+      borderRadius:2,
     },
   instructions: {
     textAlign: 'center',
